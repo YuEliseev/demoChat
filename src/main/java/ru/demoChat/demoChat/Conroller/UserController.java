@@ -1,28 +1,44 @@
 package ru.demoChat.demoChat.Conroller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import ru.demoChat.demoChat.DAO.UserDAO;
+import ru.demoChat.demoChat.Model.User;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
-    @GetMapping
-    public static String showAllUsers(){
 
-        return "allUsers";
+    private final UserDAO userDAO;
+    @Autowired
+    public UserController(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @GetMapping
-    public static String newUser(){
+    public String showAllUsers(Model model){
+        model.addAttribute("users", userDAO.showAll());
+        return "allUsers";
+    }
 
+    @GetMapping("/{id}")
+    public String showUserById(@PathVariable ("id") int id, Model model ){
+        model.addAttribute("user", userDAO.getById(id));
+        return "userPage";
+    }
+
+    @GetMapping("/newUser")
+    public String newUser(Model model){
+            model.addAttribute("user", new User());
         return "newUser";
     }
 
     @PostMapping
-    public static String saveUser(){
-        return "redirect:users/allUsers";
+    public String saveUser(@ModelAttribute("user") User user){
+        userDAO.save(user);
+        return "redirect:/users";
     }
 }
