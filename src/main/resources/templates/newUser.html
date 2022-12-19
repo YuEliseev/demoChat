@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/users}" th:object = ${user}>
+    <label for="name">Enter Name</label>
+    <input type="text" th:field="*{name}" id = "name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name ERROR</div>
+    <br/>
+
+    <label for="age">Enter Age</label>
+    <input type="text" th:field="*{age}" id = "age"/>
+    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age ERROR</div>
+    <br/>
+
+    <label for="status">Choose your status</label>
+    <input type="text" th:field="*{status}" id = "status"/>
+    <br/>
+
+    <label for="about">Tell something about You</label>
+    <input type="text" th:field="*{about}" id = "about"/>
+    <br/>
+
+    <input type="submit" value="Save user"/>
+</form>
+</body>
+</html>

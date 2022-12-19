@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>All users</title>
 </head>
 <body>
-<p>EEEEEYYYY</p>
+<div th:each="user : ${users}">
+    <a th:href="@{/users/{id}(id=${user.getId()})}" th:text="${user.getName()} + ',' + ${user.getAge()}">user</a>
+
+</div>
+<br/>
+<hr/>
+
+<a th:href="@{/users/newUser}">Create new person</a>
 </body>
 </html>
