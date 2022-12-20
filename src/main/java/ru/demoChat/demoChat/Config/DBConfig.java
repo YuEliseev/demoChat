@@ -1,20 +1,20 @@
-//package ru.demoChat.demoChat.Config;
-//
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//import org.springframework.boot.context.properties.ConfigurationProperties;
-//import org.springframework.context.annotation.Configuration;
-//
-//@Configuration
-//@Data
-//@NoArgsConstructor
-//@ConfigurationProperties(prefix = "postgres-param")
-//public class DBConfig {
-//    private String url;
-//    private String user;
-//    private String password;
-//    private String driver;
-//}
+package ru.demoChat.demoChat.Config;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@Data
+@NoArgsConstructor
+@ConfigurationProperties(prefix = "postgres-param")
+public class DBConfig {
+    private String url;
+    private String user;
+    private String password;
+    private String driver;
+}
 
 
 //    create table users(
@@ -34,3 +34,7 @@
 //        constraint fk_sender foreign key(sender) references users(id),
 //        constraint fk_receiver foreign key(receiver) references users(id)
 //        )
+
+//    alter table messages
+//        drop sendingTime,
+//        add sendingDateTime timestamp;

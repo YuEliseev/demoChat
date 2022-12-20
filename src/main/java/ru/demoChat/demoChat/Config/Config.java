@@ -12,20 +12,19 @@ import javax.sql.DataSource;
 @Configuration
 public class Config implements WebMvcConfigurer {
 
-//    @Autowired
-//    DBConfig dbConfig;
+    @Autowired
+    DBConfig dbConfig;
 
     @Bean
     public DataSource dataSource(){
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5433/postgres");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("postgres");
+        dataSource.setDriverClassName(dbConfig.getDriver());
+        dataSource.setUrl(dbConfig.getUrl());
+        dataSource.setUsername(dbConfig.getUser());
+        dataSource.setPassword(dbConfig.getPassword());
 
-//        dataSource.setDriverClassName("org.postgresql.Driver");
         return dataSource;
     }
 
