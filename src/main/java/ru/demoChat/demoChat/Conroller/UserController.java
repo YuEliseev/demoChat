@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.demoChat.demoChat.DAO.MessageDAO;
 import ru.demoChat.demoChat.DAO.UserDAO;
+import ru.demoChat.demoChat.Model.Message;
 import ru.demoChat.demoChat.Model.User;
 
 @Controller
@@ -46,16 +47,23 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/messages/{id}")
-    public String userMessages(@PathVariable("id") int id, Model model){
-        model.addAttribute("messages", messageDAO.getUserMessages(id));
+    @GetMapping("/income/{id}")
+    public String userIncome(@PathVariable("id") int id, Model model){
+        model.addAttribute("messages", messageDAO.getIncome(id));
 
-        return "message/Incomes";
+        return "message/income";
     }
 
     @GetMapping("/newMessage")
-    public String newMessage(){
+    public String newMessage(Model model){
+        model.addAttribute("message", new Message());
+        return "message/income";
+    }
 
+    @PostMapping
+    public String create (@ModelAttribute("message") Message message){
+        messageDAO.save(message);
+        return "redirect:/income/{id}";
     }
 
 }
